@@ -1,5 +1,5 @@
-# Laravel 5 Api Controller
-A simple api controller utilizing league fractal, inspired by Jeffrey Way.
+# Laravel 5 Fractal Api Controller
+A simple api controller helper utilizing league fractal.
 
 ## Installation
 ```composer require eventhomes/laravel-apicontroller```
@@ -7,15 +7,15 @@ A simple api controller utilizing league fractal, inspired by Jeffrey Way.
 ## Basic Usage
 ```php
 ...
-use EventHomes\Api\ApiController;
+use EventHomes\Api\FractalHelper;
 
 class MyController extends Controller {
 
-    use ApiController;
-    
-    public function __contstruct(Request $request)
+    use FractalHelper;
+
+    public function __construct(Manager $manager, Request $request)
     {
-        $this->parseIncludes($request);
+        $this->setFractal($manager)->parseIncludes($request->get('includes', ''));
     }
 }
 ```
@@ -24,17 +24,16 @@ class MyController extends Controller {
 
 ```php
 ...
-use EventHomes\Api\ApiController;
+use EventHomes\Api\FractalHelper;
 
 class MyController extends Controller {
 
-    use ApiController;
-    
-    public function __contstruct(Request $request, Manager $manager)
+    use FractalHelper;
+
+    public function __construct(Manager $manager, Request $request)
     {
-        $manager->setSerializer(new ArraySerializer());
-        $this->setFractal($manager);
-        $this->parseIncludes($request);
+        $manager->setSerializer(new JsonApiSerializer);
+        $this->setFractal($manager)->parseIncludes($request->get('includes', ''));
     }
 }
 ```

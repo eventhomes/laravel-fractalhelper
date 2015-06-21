@@ -2,7 +2,7 @@
 A simple api controller helper utilizing league fractal.
 
 ## Installation
-```composer require eventhomes/laravel-apicontroller```
+```composer require eventhomes/laravel-fractalhelper```
 
 ## Basic Usage
 ```php

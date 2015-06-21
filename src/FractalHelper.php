@@ -23,7 +23,7 @@ trait FractalHelper {
      */
     public function getFractal()
     {
-        if ( !property_exists($this, 'fractal'))
+        if ( !isset($this->fractal))
         {
             $this->fractal = new Manager;
             $this->fractal->setSerializer(new ArraySerializer());
@@ -74,19 +74,26 @@ trait FractalHelper {
 
     /**
      * @param $collection
-     * @param $callback
-     *
-     * @param null $paginator
+     * @param $transformer
      *
      * @return \Illuminate\Http\JsonResponse
+     *
      */
-    protected function respondWithCollection($collection, $callback, $paginator = null)
+    protected function respondWithCollection($collection, $transformer)
     {
-        $resource = new Collection($collection, $callback);
+        $paginator = null;
+
+        if (get_class($collection) !== 'Illuminate\Database\Eloquent\Collection')
+        {
+            $paginator = new IlluminatePaginatorAdapter($collection);
+            $collection = $collection->getCollection();
+        }
+
+        $resource = new Collection($collection, $transformer);
 
         if ($paginator)
         {
-            $resource->setPaginator(new IlluminatePaginatorAdapter($paginator));
+            $resource->setPaginator($paginator);
         }
 
         $rootScope = $this->getFractal()->createData($resource);

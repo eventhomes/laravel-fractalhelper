@@ -1,0 +1,29 @@
+{
+  "name": "eventhomes/laravel-fractalhelper",
+  "description": "Compatible with Laravel 5+ and Lumen 5+.",
+  "keywords": [
+    "laravel",
+    "lumen",
+    "api controller",
+    "api",
+    "fractal"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Bill Richards",
+      "email": "roundedvision@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.9",
+    "eventhomes/laravel-apicontroller": "~0.1.5",
+    "league/fractal": "~0.12"
+  },
+  "autoload": {
+    "psr-4": {
+      "EventHomes\\Api\\": "src/"
+    }
+  },
+  "minimum-stability": "stable"
+}

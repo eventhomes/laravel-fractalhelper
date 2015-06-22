@@ -1,5 +1,5 @@
-# Laravel 5 Fractal Api Controller
-A simple api controller helper utilizing league fractal.
+# Laravel 5 / Lumen 5 Fractal Api Controller
+A simple api controller helper utilizing league fractal. You also get all the functionality provided by https://github.com/eventhomes/laravel-apicontroller
 
 ## Installation
 ```composer require eventhomes/laravel-fractalhelper```
@@ -43,7 +43,7 @@ class MyController extends Controller {
 ```php
 public function show($id) {
     $user = User::find($id);
-    return $this->respondWithItem($user);
+    return $this->respondWithItem($user, new UserTransformer);
 }
 ```
 
@@ -51,7 +51,7 @@ public function show($id) {
 ```php
 public function show() {
     $users = User::all();
-    return $this->respondWithCollection($users);
+    return $this->respondWithCollection($users, new UserTransformer);
 }
 ```
 
@@ -59,6 +59,6 @@ public function show() {
 ```php
 public function show() {
     $users = User::paginate(10);
-    return $this->respondWithCollection($users);
+    return $this->respondWithCollection($users, new UserTransformer);
 }
 ```

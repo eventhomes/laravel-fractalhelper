@@ -52,9 +52,32 @@ trait FractalHelper {
      */
     public function parseIncludes($includes = '')
     {
+        if (is_null($includes))
+        {
+            $includes = '';
+        }
+
         $this->getFractal()->parseIncludes($includes);
 
         return $this;
+    }
+
+    /**
+     * @param $transformer
+     *
+     * @return array
+     */
+    public function getEagerLoadsForTransformer($transformer)
+    {
+        $requested_includes = $this->getFractal()->getRequestedIncludes();
+        $available_includes = $transformer->getAvailableIncludes();
+        $default_includes = $transformer->getDefaultIncludes();
+
+        $available_requested_includes = array_intersect($available_includes, $requested_includes);
+
+        $final_includes = array_unique(array_merge($available_requested_includes, $default_includes));
+
+        return $final_includes;
     }
 
     /**

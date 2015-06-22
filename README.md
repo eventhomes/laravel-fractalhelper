@@ -41,7 +41,8 @@ class MyController extends Controller {
 
 ## Respond with item
 ```php
-public function show($id) {
+public function show($id)
+{
     $user = User::find($id);
     return $this->respondWithItem($user, new UserTransformer);
 }
@@ -49,7 +50,8 @@ public function show($id) {
 
 ## Respond with collection
 ```php
-public function show() {
+public function index()
+{
     $users = User::all();
     return $this->respondWithCollection($users, new UserTransformer);
 }
@@ -57,7 +59,8 @@ public function show() {
 
 ## Respond with collection, paginated
 ```php
-public function show() {
+public function index()
+{
     $users = User::paginate(10);
     return $this->respondWithCollection($users, new UserTransformer);
 }

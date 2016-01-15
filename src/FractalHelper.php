@@ -9,7 +9,8 @@ use League\Fractal\Resource\Item;
 use League\Fractal\Manager;
 use League\Fractal\Serializer\ArraySerializer;
 
-trait FractalHelper {
+trait FractalHelper
+{
 
     use ApiController;
 
@@ -23,8 +24,7 @@ trait FractalHelper {
      */
     public function getFractal()
     {
-        if ( !isset($this->fractal))
-        {
+        if (!isset($this->fractal)) {
             $this->fractal = new Manager;
             $this->fractal->setSerializer(new ArraySerializer());
         }
@@ -52,8 +52,7 @@ trait FractalHelper {
      */
     public function parseIncludes($includes = '')
     {
-        if (is_null($includes))
-        {
+        if (is_null($includes)) {
             $includes = '';
         }
 
@@ -98,24 +97,23 @@ trait FractalHelper {
     /**
      * @param $collection
      * @param $transformer
+     * @param $key [resource key]
      *
      * @return \Illuminate\Http\JsonResponse
      *
      */
-    protected function respondWithCollection($collection, $transformer)
+    protected function respondWithCollection($collection, $transformer, $key = null)
     {
         $paginator = null;
 
-        if (get_class($collection) !== 'Illuminate\Database\Eloquent\Collection')
-        {
+        if (get_class($collection) !== 'Illuminate\Database\Eloquent\Collection') {
             $paginator = new IlluminatePaginatorAdapter($collection);
             $collection = $collection->getCollection();
         }
 
-        $resource = new Collection($collection, $transformer);
+        $resource = new Collection($collection, $transformer, $key);
 
-        if ($paginator)
-        {
+        if ($paginator) {
             $resource->setPaginator($paginator);
         }
 

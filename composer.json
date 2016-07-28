@@ -18,7 +18,7 @@
   "require": {
     "php": ">=5.5.9",
     "eventhomes/laravel-apicontroller": "~0.1.5",
-    "league/fractal": "~0.12"
+    "league/fractal": "~0.13"
   },
   "autoload": {
     "psr-4": {

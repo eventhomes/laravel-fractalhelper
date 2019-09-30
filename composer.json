@@ -16,8 +16,8 @@
     }
   ],
   "require": {
-    "php": ">=5.5.9",
-    "eventhomes/laravel-apicontroller": "~0.1.5",
+    "php": "^7.2",
+    "eventhomes/laravel-apicontroller": "~0.1.9",
     "league/fractal": "~0.13"
   },
   "autoload": {

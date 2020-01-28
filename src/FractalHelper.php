@@ -2,16 +2,14 @@
 
 namespace EventHomes\Api;
 
-use EventHomes\Api\ApiController;
+use League\Fractal\Manager;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
-use League\Fractal\Manager;
 use League\Fractal\Serializer\ArraySerializer;
 
 trait FractalHelper
 {
-
     use ApiController;
 
     /**
@@ -106,7 +104,9 @@ trait FractalHelper
     {
         $paginator = null;
 
-        if (get_class($collection) !== 'Illuminate\Database\Eloquent\Collection') {
+        $collectionClass = 'Illuminate\Support\Collection';
+
+        if (!($collection instanceof $collectionClass)) {
             $paginator = new IlluminatePaginatorAdapter($collection);
             $collection = $collection->getCollection();
         }
